@@ -71,26 +71,28 @@
 
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
-            if(this.readyState === 4 && this.status === 406) {
-                var message = JSON.parse(this.responseText);
-                // $(".error").html("*");
-                var errorElements = document.getElementsByClassName('error');
-                for(var j = 0; j < errorElements.length; j++)
-                    errorElements[j].innerHTML = '*';
-                for(var i = 0; i < message.length; i++) {
-                    document.getElementById(message[i].attributeName + 'Err').innerHTML = message[i].message;
-                    console.log('Error ' + message[i].attributeName + ' ' + message[i].message);
+            if(this.readyState === 4) {
+                if(this.status === 406) {
+                    var message = JSON.parse(this.responseText);
+                    // $(".error").html("*");
+                    var errorElements = document.getElementsByClassName('error');
+                    for(var j = 0; j < errorElements.length; j++)
+                        errorElements[j].innerHTML = '*';
+                    for(var i = 0; i < message.length; i++) {
+                        document.getElementById(message[i].attributeName + 'Err').innerHTML = message[i].message;
+                        console.log('Error ' + message[i].attributeName + ' ' + message[i].message);
+                    }
+                    document.getElementById('page-message').innerHTML = 'Fix errors and click Save';
+                } else if(this.status === 200) {
+                    console.log('Post Succesful');
+                    document.getElementById('page-message').innerHTML = 'Record Added';
+                    window.location.assign('student-list.html');
+                } else {
+                    document.getElementById('page-message').innerHTML = 'Error:' + this.statusText;
+                    // console.log(errorThrown);
+                    console.log('error ' + this.statusText);
+                    console.log('incoming Text ' + this.responseText);
                 }
-                document.getElementById('page-message').innerHTML = 'Fix errors and click Save';
-            } else if(this.readyState === 4 && this.status === 200) {
-                console.log('Post Succesful');
-                document.getElementById('page-message').innerHTML = 'Record Added';
-                window.location.assign('student-list.html');
-            } else if(this.readyState === 4) {
-                document.getElementById('page-message').innerHTML = 'Error:' + this.statusText;
-                // console.log(errorThrown);
-                console.log('error ' + this.statusText);
-                console.log('incoming Text ' + this.responseText);
             }
         };
         xmlhttp.open('PUT', '/api/students/' + id, true);
