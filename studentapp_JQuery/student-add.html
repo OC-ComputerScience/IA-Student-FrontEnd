@@ -11,10 +11,12 @@
         if(zip !== '') {
             $.getJSON('/api/zip/' + zip)
                 .done(function(data) {
-                    if($('#city').val() === '')
-                        $('#city').val(data.city);
-                    if($('#state').val() === '')
-                        $('#state').val(data.state_code);
+                    var city = $('#city');
+                    if(city.val() === '')
+                        city.val(data.city);
+                    var state = $('#state');
+                    if(state.val() === '')
+                        state.val(data.state_code);
                 });
 
         }
@@ -34,9 +36,11 @@
             var zip = $('#zip').val();
             var email = $('#email').val();
             var classification = $('input[name=\'classification\']:checked').val();
-            if(classification == null) classification = '';
+            if(classification == null)
+                classification = '';
             var gender = $('input[name=\'gender\']:checked').val();
-            if(gender == null) gender = '';
+            if(gender == null)
+                gender = '';
 
             $.ajax({
                 url: '/api/students/',

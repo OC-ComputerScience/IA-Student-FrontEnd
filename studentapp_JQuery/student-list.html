@@ -16,7 +16,8 @@
     }
 
     function getNext() {
-        if($('#student-list-table') && $('#student-list-table').prop('rows').length - 1 === page)
+        var table = $('#student-list-table');
+        if(table && table.prop('rows').length - 1 === page)
             start = start + page;
         createTable(start);
     }
