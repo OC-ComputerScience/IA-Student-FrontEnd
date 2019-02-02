@@ -8,12 +8,12 @@
 <body>
 <script>
     function getLocation(zip) {
-        if(zip != '') {
+        if(zip !== '') {
             $.getJSON('/api/zip/' + zip)
                 .done(function(data) {
-                    if($('#city').val() == '')
+                    if($('#city').val() === '')
                         $('#city').val(data.city);
-                    if($('#state').val() == '')
+                    if($('#state').val() === '')
                         $('#state').val(data.state_code);
                 });
 
