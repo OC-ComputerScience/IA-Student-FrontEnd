@@ -26,8 +26,8 @@
                 console.log('Delete success ');
                 window.location.assign('student-list.html');
             } else if(xmlhttp.readyState === 4) {
-                console.log('Delete error ' + textStatus);
-                console.log('incoming Text ' + jqXHR.responseText);
+                console.log('Delete error ' + this.statusText);
+                console.log('incoming Text ' + this.responseText);
             }
         };
         xmlhttp.open('DELETE', '/api/students/' + urlParam('id'), true);
