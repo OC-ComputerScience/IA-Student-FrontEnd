@@ -76,7 +76,7 @@
                 window.location.assign('student-list.html');
             } else if(this.readyState === 4) {
                 document.getElementById('page-message').innerHTML = 'Error:' + textStatus;
-                consule.log(errorThrown);
+                console.log(errorThrown);
                 console.log('error ' + textStatus);
                 console.log('incoming Text ' + jqXHR.responseText);
 
