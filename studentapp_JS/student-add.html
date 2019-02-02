@@ -46,17 +46,17 @@
             gender = '';
         else
             gender = genderRadio.value;
-        var data = '{' +
-            '"idNumber" : "' + idNumber + '",' +
-            '"firstName" :"' + firstName + '",' +
-            '"lastName" : "' + lastName + '",' +
-            '"city" : "' + city + '",' +
-            '"state" : "' + state + '",' +
-            '"zip" : "' + zip + '",' +
-            '"email" : "' + email + '",' +
-            '"classification" : "' + classification + '",' +
-            '"gender" : "' + gender + '"' +
-            '}';
+        var data = JSON.stringify({
+            idNumber: idNumber,
+            firstName: firstName,
+            lastName: lastName,
+            city: city,
+            state: state,
+            zip: zip,
+            email: email,
+            classification: classification,
+            gender: gender
+        });
 
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
