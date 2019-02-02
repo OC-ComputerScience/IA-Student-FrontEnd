@@ -46,17 +46,17 @@
                 type: 'POST',
                 dataType: 'json',
                 contentType: 'application/json',
-                data: '{' +
-                    '"idNumber" : "' + idNumber + '",' +
-                    '"firstName" :"' + firstName + '",' +
-                    '"lastName" : "' + lastName + '",' +
-                    '"city" : "' + city + '",' +
-                    '"state" : "' + state + '",' +
-                    '"zip" : "' + zip + '",' +
-                    '"email" : "' + email + '",' +
-                    '"classification" : "' + classification + '",' +
-                    '"gender" : "' + gender + '"' +
-                    '}',
+                data: JSON.stringify({
+                    idNumber: idNumber,
+                    firstName: firstName,
+                    lastName: lastName,
+                    city: city,
+                    state: state,
+                    zip: zip,
+                    email: email,
+                    classification: classification,
+                    gender: gender
+                }),
                 statusCode: {
                     200: function(response) {
                         $('#page-message').html('Record Added');

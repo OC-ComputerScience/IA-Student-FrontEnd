@@ -72,18 +72,18 @@
                 type: 'PUT',
                 dataType: 'json',
                 contentType: 'application/json',
-                data: '{' +
-                    '"id" : "' + $.urlParam('id') + '",' +
-                    '"idNumber" : "' + idNumber + '",' +
-                    '"firstName" :"' + firstName + '",' +
-                    '"lastName" : "' + lastName + '",' +
-                    '"city" : "' + city + '",' +
-                    '"state" : "' + state + '",' +
-                    '"zip" : "' + zip + '",' +
-                    '"email" : "' + email + '",' +
-                    '"classification" : "' + classification + '",' +
-                    '"gender" : "' + gender + '"' +
-                    '}',
+                data: JSON.stringify({
+                    id: $.urlParam('id'),
+                    idNumber: idNumber,
+                    firstName: firstName,
+                    lastName: lastName,
+                    city: city,
+                    state: state,
+                    zip: zip,
+                    email: email,
+                    classification: classification,
+                    gender: gender
+                }),
                 statusCode: {
                     200: function(response) {
                         $('#page-message').html('Record Updated');
