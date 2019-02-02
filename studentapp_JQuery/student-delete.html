@@ -17,8 +17,6 @@
     };
 
     $(document).ready(function() {
-
-
         $.getJSON('/api/students/' + $.urlParam('id'))
             .done(function(response) {
                 console.log(response);
@@ -40,13 +38,11 @@
                 success: (function(data) {
                     console.log('Delete success ');
                     window.location.assign('student-list.html');
-
                 }),
                 fail: (function(jqXHR, textStatus, errorThrown) {
                     console.log('Delete error ' + textStatus);
                     console.log('incoming Text ' + jqXHR.responseText);
                 })
-
             });
             console.log('end of delete');
         });

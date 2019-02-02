@@ -20,18 +20,19 @@
             $.getJSON('/api/zip/' + zip)
                 .done(function(data) {
                     var city = $('#city');
+                    var state = $('#state');
                     if(city.val() === '')
                         city.val(data.city);
-                    var state = $('#state');
                     if(state.val() === '')
                         state.val(data.state_code);
                 });
-
         }
     }
 
     $(document).ready(function() {
-        $('#zip').blur(function() {getLocation($(this).val());});
+        $('#zip').blur(function() {
+            getLocation($(this).val());
+        });
 
         $.getJSON('/api/students/' + $.urlParam('id'))
             .done(function(response) {
@@ -60,9 +61,11 @@
             var zip = $('#zip').val();
             var email = $('#email').val();
             var classification = $('input[name=\'classification\']:checked').val();
-            if(classification == null) classification = '';
+            if(classification == null)
+                classification = '';
             var gender = $('input[name=\'gender\']:checked').val();
-            if(gender == null) gender = '';
+            if(gender == null)
+                gender = '';
 
             $.ajax({
                 url: '/api/students/' + $.urlParam('id'),
@@ -83,7 +86,6 @@
                     '}',
                 statusCode: {
                     200: function(response) {
-
                         $('#page-message').html('Record Updated');
                         window.location.assign('student-list.html');
                     },
@@ -96,16 +98,14 @@
                         });
                         $('#page-message').html('Fix errors and click Save');
                     },
-
                     404: function(jqXHR, textStatus, errorThrown) {
                         $('#page-message').html('Error:' + textStatus);
-                        consule.log(errorThrown);
+                        console.log(errorThrown);
                         console.log('error ' + textStatus);
                         console.log('incoming Text ' + jqXHR.responseText);
                     }
                 }
             });
-
             e.preventDefault();
         });
     });
