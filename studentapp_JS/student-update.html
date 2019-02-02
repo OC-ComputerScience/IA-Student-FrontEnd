@@ -18,7 +18,7 @@
 
     function getLocation(zip) {
         if(zip !== '') {
-            xmlhttp = new XMLHttpRequest();
+            var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if(this.readyState === 4 && this.status === 200) {
                     var results = JSON.parse(this.responseText);
@@ -43,11 +43,17 @@
         var zip = document.getElementById('zip').value;
         var email = document.getElementById('email').value;
         var classificationRadio = document.querySelector('input[name=\'classification\']:checked');
-        if(classificationRadio == null) classification = '';
-        else classification = classificationRadio.value;
+        var classification;
+        if(classificationRadio == null)
+            classification = '';
+        else
+            classification = classificationRadio.value;
         var genderRadio = document.querySelector('input[name=\'gender\']:checked');
-        if(genderRadio == null) gender = '';
-        else gender = genderRadio.value;
+        var gender;
+        if(genderRadio == null)
+            gender = '';
+        else
+            gender = genderRadio.value;
         var data = '{' +
             '"idNumber" : "' + idNumber + '",' +
             '"firstName" :"' + firstName + '",' +
@@ -60,7 +66,7 @@
             '"gender" : "' + gender + '"' +
             '}';
 
-        xmlhttp = new XMLHttpRequest();
+        var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if(this.readyState === 4 && this.status === 406) {
                 var message = JSON.parse(this.responseText);
@@ -72,7 +78,6 @@
                     document.getElementById(message[i].attributeName + 'Err').innerHTML = message[i].message;
                     console.log('Error ' + message[i].attributeName + ' ' + message[i].message);
                 }
-                ;
                 document.getElementById('page-message').innerHTML = 'Fix errors and click Save';
             } else if(this.readyState === 4 && this.status === 200) {
                 console.log('Post Succesful');
@@ -93,8 +98,7 @@
 
     document.onreadystatechange = function() {
         if(document.readyState === 'complete') {
-
-            xmlhttp = new XMLHttpRequest();
+            var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if(xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                     var response = JSON.parse(this.responseText);

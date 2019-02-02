@@ -19,7 +19,7 @@
         console.log('delete function');
         document.getElementById('deleteMessage').innerHTML = 'Deleting record ... Wait';
         document.getElementById('deletebtn').setAttribute('disabled', true);
-        xmlhttp = new XMLHttpRequest();
+        var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if(xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                 console.log('Delete success ');
@@ -35,8 +35,7 @@
 
     document.onreadystatechange = function() {
         if(document.readyState === 'complete') {
-
-            xmlhttp = new XMLHttpRequest();
+            var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if(xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                     var response = JSON.parse(this.responseText);
