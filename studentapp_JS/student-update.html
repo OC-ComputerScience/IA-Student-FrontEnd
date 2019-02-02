@@ -96,7 +96,6 @@
         xmlhttp.open('PUT', '/api/students/' + id, true);
         xmlhttp.setRequestHeader('Content-type', 'application/json');
         xmlhttp.send(data);
-        e.preventDefault();
     }
 
     document.onreadystatechange = function() {
