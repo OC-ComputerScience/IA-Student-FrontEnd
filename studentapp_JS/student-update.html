@@ -18,7 +18,8 @@
         }
     }
 
-    function getLocation(zip) {
+    function getLocation(e) {
+        var zip = e.target.value;
         if(zip !== '') {
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
@@ -134,11 +135,11 @@
         Fist Name: <input type="text" id="firstName">
         <span id="firstNameErr" class="error">* </span>
         <br><br>
-        Last Name: <input type="text" id="lastName" ">
+        Last Name: <input type="text" id="lastName">
         <span id="lastNameErr" class="error">* </span>
         <br><br>
-        Zip: <input type="text" id="zip" onblur="getLocation(this.value)">
-        <span id="zipErr" class="error" '>* </span>
+        Zip: <input type="text" id="zip" onblur="getLocation(event)">
+        <span id="zipErr" class="error">* </span>
         <br><br>
         City: <input type="text" id="city">
         <span id="cityErr" class="error">* </span>
