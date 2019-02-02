@@ -1,138 +1,133 @@
-<!DOCTYPE HTML> 
+<!DOCTYPE HTML>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
-<body> 
+<body>
 <script>
-function getLocation(zip)
-{
-	if (zip != '')
-	{
-		xmlhttp = new XMLHttpRequest();
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				var results = JSON.parse(this.responseText);
-				if(document.getElementById("city").value=='')
-					 document.getElementById("city").value=results.city;
-				if( document.getElementById("state").value=='')
-					 	document.getElementById("state").value=results.state_code;	
-			}
-		};
-		xmlhttp.open("GET","/api/zip/"+zip,true);
-		xmlhttp.send();
-	}
-}
+    function getLocation(zip) {
+        if(zip != '') {
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var results = JSON.parse(this.responseText);
+                    if(document.getElementById('city').value == '')
+                        document.getElementById('city').value = results.city;
+                    if(document.getElementById('state').value == '')
+                        document.getElementById('state').value = results.state_code;
+                }
+            };
+            xmlhttp.open('GET', '/api/zip/' + zip, true);
+            xmlhttp.send();
+        }
+    }
 
-function submitForm (e){
-		e.preventDefault;
-		var idNumber =document.getElementById("id").value;
-		var firstName = document.getElementById("firstName").value;
-		var lastName = document.getElementById("lastName").value;
-		var city= document.getElementById("city").value;
-		var state = document.getElementById("state").value;
-		var zip = document.getElementById("zip").value; 
-		var email = document.getElementById("email").value;
-		var classificationRadio = document.querySelector("input[name='classification']:checked");
-		if (classificationRadio == null) classification ="";
-		else classification = classificationRadio.value;
-		var genderRadio = document.querySelector("input[name='gender']:checked");
-		if (genderRadio == null) gender ="";
-		else gender = genderRadio.value;
-		var data = '{'+  
-				'"idNumber" : "'+idNumber+'",'+
-				'"firstName" :"'+ firstName+'",'+
-				'"lastName" : "'+lastName+'",'+
-				'"city" : "'+city+'",'+
-				'"state" : "'+state+'",'+
-				'"zip" : "'+zip+'",'+
-				'"email" : "'+email+'",'+
-				'"classification" : "'+classification+'",'+
-				'"gender" : "'+gender+'"'+
-			"}";
+    function submitForm(e) {
+        e.preventDefault;
+        var idNumber = document.getElementById('id').value;
+        var firstName = document.getElementById('firstName').value;
+        var lastName = document.getElementById('lastName').value;
+        var city = document.getElementById('city').value;
+        var state = document.getElementById('state').value;
+        var zip = document.getElementById('zip').value;
+        var email = document.getElementById('email').value;
+        var classificationRadio = document.querySelector('input[name=\'classification\']:checked');
+        if(classificationRadio == null) classification = '';
+        else classification = classificationRadio.value;
+        var genderRadio = document.querySelector('input[name=\'gender\']:checked');
+        if(genderRadio == null) gender = '';
+        else gender = genderRadio.value;
+        var data = '{' +
+            '"idNumber" : "' + idNumber + '",' +
+            '"firstName" :"' + firstName + '",' +
+            '"lastName" : "' + lastName + '",' +
+            '"city" : "' + city + '",' +
+            '"state" : "' + state + '",' +
+            '"zip" : "' + zip + '",' +
+            '"email" : "' + email + '",' +
+            '"classification" : "' + classification + '",' +
+            '"gender" : "' + gender + '"' +
+            '}';
 
-		xmlhttp = new XMLHttpRequest();
-		xmlhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 406) {
-				var message = JSON.parse(this.responseText);
-				 // $(".error").html("*");
-				var errorElements = document.getElementsByClassName("error");
-				for (var j=0;j<errorElements.length;j++)
-					errorElements[j].innerHTML="*";
-				for (var i=0;i<message.length; i++)
-				{
-		  			document.getElementById(message[i].attributeName+"Err").innerHTML=message[i].message;
-		  			console.log("Error "+message[i].attributeName +" "+message[i].message)
-    	        };
-				  document.getElementById("page-message").innterHTML="Fix errors and click Save";
-				  
-			}	
-			else if (this.readyState == 4 && this.status == 200) {
-				console.log("Post Succesful");
-				document.getElementById("page-message").innerHTML="Record Added";
-				window.location.assign("student-list.html");	
-			}
-			else if (this.readyState == 4) {
-				document.getElementById("page-message").innerHTML="Error:"+textStatus;
-				consule.log(errorThrown);
-	  	        console.log("error " + textStatus);
-				console.log("incoming Text " + jqXHR.responseText);
-				  
-			}
-		};
-		xmlhttp.open("POST","/api/students/",true);
-		xmlhttp.setRequestHeader("Content-type", "application/json");
-		xmlhttp.send(data);
-		e.preventDefault()
-};
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 406) {
+                var message = JSON.parse(this.responseText);
+                // $(".error").html("*");
+                var errorElements = document.getElementsByClassName('error');
+                for(var j = 0; j < errorElements.length; j++)
+                    errorElements[j].innerHTML = '*';
+                for(var i = 0; i < message.length; i++) {
+                    document.getElementById(message[i].attributeName + 'Err').innerHTML = message[i].message;
+                    console.log('Error ' + message[i].attributeName + ' ' + message[i].message);
+                }
+                ;
+                document.getElementById('page-message').innterHTML = 'Fix errors and click Save';
 
+            } else if(this.readyState == 4 && this.status == 200) {
+                console.log('Post Succesful');
+                document.getElementById('page-message').innerHTML = 'Record Added';
+                window.location.assign('student-list.html');
+            } else if(this.readyState == 4) {
+                document.getElementById('page-message').innerHTML = 'Error:' + textStatus;
+                consule.log(errorThrown);
+                console.log('error ' + textStatus);
+                console.log('incoming Text ' + jqXHR.responseText);
+
+            }
+        };
+        xmlhttp.open('POST', '/api/students/', true);
+        xmlhttp.setRequestHeader('Content-type', 'application/json');
+        xmlhttp.send(data);
+        e.preventDefault();
+    };
 </script>
 
 <h2>Student Add</h2>
-<p id ='debug'></p>
-<div class ='block-center'>
-<p><span id="page-message">Enter fields and click Save</span></p>
-<p><span class="error-head">* required field.</span></p>
-<form id="studentForm" onsubmit ="submitForm(event)"> 
-   Id: <input type="text" id="id" >
-   <span id="idNumberErr" class="error">* </span>
-   <br><br>
-   Fist Name: <input type="text" id="firstName">
-   <span id="firstNameErr" class="error">* </span>
-   <br><br>
-   Last Name: <input type="text" id="lastName" ">
-   <span id="lastNameErr" class="error">* </span>
-   <br><br>
-   Zip: <input type="text" id="zip" onblur="getLocation(this.value)" >
-   <span id="zipErr" class="error">* </span>
-   <br><br>
-   City: <input type="text" id="city">
-   <span id="cityErr" class="error">* </span>
-   <br><br>
-   State: <input type="text" id="state">
-   <span id="stateErr" class="error">* </span>
-   <br><br>
-   E-mail: <input type="text" id="email" >
-   <span id="emailErr" class="error">* </span>
-   <br><br>
-   Classification:
-   <input type="radio" name="classification"  value="FR">Freshman
-   <input type="radio" name="classification"  value="SO">Sophmore
-   <input type="radio" name="classification"  value="JR">Junior
-   <input type="radio" name="classification"  value="SR">Senior
-   <span id="classificationErr" class="error">* </span>
-   <br><br>
-   Gender:
-   <input type="radio" name="gender"   value="F">Female
-   <input type="radio" name="gender"  value="M">Male
-   <span id="genderErr" class="error">* </span>
-   <br><br>
-   <input type="submit" name="submit" value="Save"> 
-</form>
-<form action="student-list.html" method ="get">
-<button type="submit" >Cancel</button>
-</form>
+<p id="debug"></p>
+<div class="block-center">
+    <p><span id="page-message">Enter fields and click Save</span></p>
+    <p><span class="error-head">* required field.</span></p>
+    <form id="studentForm" onsubmit="submitForm(event)">
+        Id: <input type="text" id="id">
+        <span id="idNumberErr" class="error">* </span>
+        <br><br>
+        Fist Name: <input type="text" id="firstName">
+        <span id="firstNameErr" class="error">* </span>
+        <br><br>
+        Last Name: <input type="text" id="lastName" ">
+        <span id="lastNameErr" class="error">* </span>
+        <br><br>
+        Zip: <input type="text" id="zip" onblur="getLocation(this.value)">
+        <span id="zipErr" class="error">* </span>
+        <br><br>
+        City: <input type="text" id="city">
+        <span id="cityErr" class="error">* </span>
+        <br><br>
+        State: <input type="text" id="state">
+        <span id="stateErr" class="error">* </span>
+        <br><br>
+        E-mail: <input type="text" id="email">
+        <span id="emailErr" class="error">* </span>
+        <br><br>
+        Classification:
+        <input type="radio" name="classification" value="FR">Freshman
+        <input type="radio" name="classification" value="SO">Sophmore
+        <input type="radio" name="classification" value="JR">Junior
+        <input type="radio" name="classification" value="SR">Senior
+        <span id="classificationErr" class="error">* </span>
+        <br><br>
+        Gender:
+        <input type="radio" name="gender" value="F">Female
+        <input type="radio" name="gender" value="M">Male
+        <span id="genderErr" class="error">* </span>
+        <br><br>
+        <input type="submit" name="submit" value="Save">
+    </form>
+    <form action="student-list.html" method="get">
+        <button type="submit">Cancel</button>
+    </form>
 
 </div>
 </body>
