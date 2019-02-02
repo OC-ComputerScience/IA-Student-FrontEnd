@@ -4,61 +4,61 @@
     <meta charset="UTF-8">
     <title>Student List</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-
-    <script>
-        var start = 0;
-        var page = 5;
-        createTable(start);
-
-        function getPrevious() {
-            start = start - page;
-            if(start < 1)
-                start = 0;
-            createTable(start);
-        }
-
-        function getNext() {
-            if(document.getElementById('student-list-table') && document.getElementById('student-list-table').rows.length - 1 === page)
-                start = start + page;
-            createTable(start);
-        }
-
-        function selectChange() {
-            id = getId();
-            document.getElementById('selectedID').innerHTML = id;
-            document.getElementById('updateID').value = id;
-            document.getElementById('deleteID').value = id;
-        }
-
-        function getId() {
-            var theStudents = document.getElementsByName('selectedRow');
-            var i = theStudents.length;
-            while(i--) {
-                if(theStudents[i].checked)
-                    return theStudents[i].value;
-            }
-        }
-
-        function createTable(start) {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if(this.readyState === 4 && this.status === 200) {
-                    var myObj = JSON.parse(this.responseText);
-                    var tableHTML = '<tr><th></th><th width= "50px">ID</th><th width= "100px">First Name</th><th width= "100px">Last Name</th></tr>';
-                    for(var i = 0; i < myObj.length; i++) {
-                        var student = myObj[i];
-                        tableHTML += '<tr><td><input type="radio" onchange= "selectChange()" name="selectedRow" value=' + student.id + '><td>' + student.idNumber + '</td><td>' + student.firstName + '</td><td>' + student.lastName + '</td></tr>';
-                    }
-                    tableHTML += '</table>';
-                    document.getElementById('student-list-table').innerHTML = tableHTML;
-                }
-            };
-            xhttp.open('GET', '/api/students?page=' + start + '&per_page=' + page, true);
-            xhttp.send();
-        }
-    </script>
 </head>
 <body>
+<script>
+    var start = 0;
+    var page = 5;
+    createTable(start);
+
+    function getPrevious() {
+        start = start - page;
+        if(start < 1)
+            start = 0;
+        createTable(start);
+    }
+
+    function getNext() {
+        if(document.getElementById('student-list-table') && document.getElementById('student-list-table').rows.length - 1 === page)
+            start = start + page;
+        createTable(start);
+    }
+
+    function selectChange() {
+        id = getId();
+        document.getElementById('selectedID').innerHTML = id;
+        document.getElementById('updateID').value = id;
+        document.getElementById('deleteID').value = id;
+    }
+
+    function getId() {
+        var theStudents = document.getElementsByName('selectedRow');
+        var i = theStudents.length;
+        while(i--) {
+            if(theStudents[i].checked)
+                return theStudents[i].value;
+        }
+    }
+
+    function createTable(start) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if(this.readyState === 4 && this.status === 200) {
+                var myObj = JSON.parse(this.responseText);
+                var tableHTML = '<tr><th></th><th width= "50px">ID</th><th width= "100px">First Name</th><th width= "100px">Last Name</th></tr>';
+                for(var i = 0; i < myObj.length; i++) {
+                    var student = myObj[i];
+                    tableHTML += '<tr><td><input type="radio" onchange= "selectChange()" name="selectedRow" value=' + student.id + '><td>' + student.idNumber + '</td><td>' + student.firstName + '</td><td>' + student.lastName + '</td></tr>';
+                }
+                tableHTML += '</table>';
+                document.getElementById('student-list-table').innerHTML = tableHTML;
+            }
+        };
+        xhttp.open('GET', '/api/students?page=' + start + '&per_page=' + page, true);
+        xhttp.send();
+    }
+</script>
+
 <h2>Student List</h2>
 <div class="block-center">
     <div id="student-table">
