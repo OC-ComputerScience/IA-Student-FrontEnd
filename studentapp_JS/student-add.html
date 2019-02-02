@@ -75,10 +75,10 @@
                 document.getElementById('page-message').innerHTML = 'Record Added';
                 window.location.assign('student-list.html');
             } else if(this.readyState === 4) {
-                document.getElementById('page-message').innerHTML = 'Error:' + textStatus;
-                console.log(errorThrown);
-                console.log('error ' + textStatus);
-                console.log('incoming Text ' + jqXHR.responseText);
+                document.getElementById('page-message').innerHTML = 'Error:' + this.statusText;
+                // console.log(errorThrown);
+                console.log('error ' + this.statusText);
+                console.log('incoming Text ' + this.responseText);
 
             }
         };
