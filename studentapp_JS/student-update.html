@@ -17,14 +17,14 @@
     }
 
     function getLocation(zip) {
-        if(zip != '') {
+        if(zip !== '') {
             xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
-                if(this.readyState == 4 && this.status == 200) {
+                if(this.readyState === 4 && this.status === 200) {
                     var results = JSON.parse(this.responseText);
-                    if(document.getElementById('city').value == '')
+                    if(document.getElementById('city').value === '')
                         document.getElementById('city').value = results.city;
-                    if(document.getElementById('state').value == '')
+                    if(document.getElementById('state').value === '')
                         document.getElementById('state').value = results.state_code;
                 }
             };
@@ -62,7 +62,7 @@
 
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
-            if(this.readyState == 4 && this.status == 406) {
+            if(this.readyState === 4 && this.status === 406) {
                 var message = JSON.parse(this.responseText);
                 // $(".error").html("*");
                 var errorElements = document.getElementsByClassName('error');
@@ -74,11 +74,11 @@
                 }
                 ;
                 document.getElementById('page-message').innerHTML = 'Fix errors and click Save';
-            } else if(this.readyState == 4 && this.status == 200) {
+            } else if(this.readyState === 4 && this.status === 200) {
                 console.log('Post Succesful');
                 document.getElementById('page-message').innerHTML = 'Record Added';
                 window.location.assign('student-list.html');
-            } else if(this.readyState == 4) {
+            } else if(this.readyState === 4) {
                 document.getElementById('page-message').innerHTML = 'Error:' + textStatus;
                 consule.log(errorThrown);
                 console.log('error ' + textStatus);
@@ -91,11 +91,11 @@
         e.preventDefault();
     };
     document.onreadystatechange = function() {
-        if(document.readyState == 'complete') {
+        if(document.readyState === 'complete') {
 
             xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
-                if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                if(xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                     var response = JSON.parse(this.responseText);
                     id = response[0].id;
                     document.getElementById('idNumber').value = response[0].idNumber;

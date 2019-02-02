@@ -21,10 +21,10 @@
         document.getElementById('deletebtn').setAttribute('disabled', true);
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
-            if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            if(xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                 console.log('Delete success ');
                 window.location.assign('student-list.html');
-            } else if(xmlhttp.readyState == 4) {
+            } else if(xmlhttp.readyState === 4) {
                 console.log('Delete error ' + textStatus);
                 console.log('incoming Text ' + jqXHR.responseText);
             }
@@ -34,11 +34,11 @@
     }
 
     document.onreadystatechange = function() {
-        if(document.readyState == 'complete') {
+        if(document.readyState === 'complete') {
 
             xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
-                if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                if(xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                     var response = JSON.parse(this.responseText);
                     console.log(response);
                     document.getElementById('deleteMessage').innerHTML = 'Delete record for: ' + response[0].firstName + ' ' + response[0].lastName + '?';
