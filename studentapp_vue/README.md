@@ -1,26 +1,39 @@
-# studentapp_vue
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### studnetapp_vue Frontend
 
-### Compiles and minifies for production
-```
-npm run build
-```
+This project is the example backend for the student app, implemented in Vue.
 
-### Run your tests
-```
-npm run test
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
+#### Prerequisites
+##### Node v10
+
+* Windows: 
+    https://nodejs.org/en/download/
+
+* Ubuntu:
+    ```bash
+    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+    sudo apt install -y nodejs
+    ```
+
+#### Setup
+
+1. First, clone to repo to make a local copy of it.
+    ```bash
+    git clone https://gitlab.com/oc-internet-apps/todo-frontend-vue.git
+    ```
+2. Move into the new directory
+    ```bash
+    cd todo-frontend-vue
+    ```
+3. (Optional) Update the backend url in `vue.config.js`.
+4. Install dependencies
+    ```bash
+    npm install
+    ```
+5. Build source code
+    ```bash
+    npm run serve
+    ```
+6. Open http://localhost:8080 in your browser
