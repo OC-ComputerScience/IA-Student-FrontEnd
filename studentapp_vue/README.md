@@ -21,7 +21,7 @@ This project is the example backend for the student app, implemented in Vue.
 
 1. First, clone to repo to make a local copy of it.
     ```bash
-    git clone https://gitlab.com/oc-internet-apps/todo-frontend-vue.git
+    git clone https://github.com/OC-ComputerScience/IA-Student-FrontEnd.git
     ```
 2. Move into the new directory
     ```bash
